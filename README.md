@@ -96,10 +96,10 @@ IPython.display.Image("runs/detect/predict/image1.jpg", width=600)
 
 This repository downloads all standard model sizes to allow testing the trade-off between inference speed and precision.
 
-N (Nano): Fastest inference, designed for resource-constrained edge devices.
-S (Small) / M (Medium): Excellent balance of speed and accuracy for standard applications.
-B (Base) / L (Large): High accuracy tailored for server-side processing and complex datasets.
-X (Extra-Large): Maximum precision and feature extraction capability; ideal for robust academic research and benchmarking.
+* N (Nano): Fastest inference, designed for resource-constrained edge devices.
+* S (Small) / M (Medium): Excellent balance of speed and accuracy for standard applications.
+* B (Base) / L (Large): High accuracy tailored for server-side processing and complex datasets.
+* X (Extra-Large): Maximum precision and feature extraction capability; ideal for robust academic research and benchmarking.
 
 ### 👨‍💻 Author
 **Waqas Ahmad**
