@@ -102,6 +102,7 @@ B (Base) / L (Large): High accuracy tailored for server-side processing and comp
 X (Extra-Large): Maximum precision and feature extraction capability; ideal for robust academic research and benchmarking.
 
 ### 👨‍💻 Author
+**Waqas Ahmad**
 Artificial Intelligence Researcher
 Focusing on Medical Computer Vision, Explainable AI (XAI), and Deep Learning architectures.
 
