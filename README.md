@@ -38,7 +38,13 @@ First, clone the core architecture and install the required packages:
 !git clone [https://github.com/THU-MIG/yolov10.git](https://github.com/THU-MIG/yolov10.git)
 %cd yolov10
 !pip install -q .
+```
 
+### 📩 Download Pre-trained Weights
+
+Run the following Python script to automatically create a weights directory and fetch all model scales for comparative testing:
+
+```bash
 import os
 import urllib.request
 
@@ -46,15 +52,56 @@ weights_dir = os.path.join(os.getcwd(), "weights")
 os.makedirs(weights_dir, exist_ok=True)
 
 urls = [
-    "[https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10n.pt](https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10n.pt)",
-    "[https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10s.pt](https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10s.pt)",
-    "[https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10m.pt](https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10m.pt)",
-    "[https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10b.pt](https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10b.pt)",
-    "[https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10x.pt](https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10x.pt)",
-    "[https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10l.pt](https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10l.pt)"
+    "[https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10n.pt](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10n.pt)",
+    "[https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10s.pt](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10s.pt)",
+    "[https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10m.pt](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10m.pt)",
+    "[https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10b.pt](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10b.pt)",
+    "[https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10x.pt](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10x.pt)",
+    "[https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10l.pt](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10l.pt)"
 ]
 
 for url in urls:
     file_name = os.path.join(weights_dir, os.path.basename(url))
     urllib.request.urlretrieve(url, file_name)
     print(f"Downloaded {file_name}")
+```
+
+### 🎯 Usage Guide
+
+Fetch Test Data
+Download your target image into the working directory. (Replace the file ID with your own if testing different images).
+
+```bash
+!gdown "10Rz_Ww_v8D_O4pG1q6xP_6s_v9C0oK72" -O image1.jpg
+```
+
+Run Inference
+Configure PyTorch settings and execute the prediction via the CLI. The example below uses the highly accurate Extra-Large (yolov10x.pt) model:
+
+```bash
+%env TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
+!yolo predict model=/kaggle/working/yolov10/weights/yolov10x.pt source=/kaggle/working/yolov10/image1.jpg save=True
+```
+
+Visualize Results
+Display the processed image with bounding boxes directly in the notebook:
+
+```bash
+import IPython
+IPython.display.Image("runs/detect/predict/image1.jpg", width=600)
+
+```
+
+### 📊 Model Scales Reference
+
+This repository downloads all standard model sizes to allow testing the trade-off between inference speed and precision.
+
+N (Nano): Fastest inference, designed for resource-constrained edge devices.
+S (Small) / M (Medium): Excellent balance of speed and accuracy for standard applications.
+B (Base) / L (Large): High accuracy tailored for server-side processing and complex datasets.
+X (Extra-Large): Maximum precision and feature extraction capability; ideal for robust academic research and benchmarking.
+
+### 👨‍💻 Author
+Artificial Intelligence Researcher
+Focusing on Medical Computer Vision, Explainable AI (XAI), and Deep Learning architectures.
+
